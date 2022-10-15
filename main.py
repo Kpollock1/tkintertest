@@ -5,8 +5,6 @@ import pyautogui as pg
 
 screenWidth, screenHeight = pg.size()
 
-#this is a test.
-
 
 def move_click():
     pg.doubleClick(1693, 348)
