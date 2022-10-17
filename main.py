@@ -43,6 +43,9 @@ def carrier_specific_fill():
     pg.press('y')
     pg.press('tab')
 
+    pg.press('y')
+    pg.press('tab')
+
     pg.click(1813, 191)
 
 
