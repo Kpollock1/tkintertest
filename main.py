@@ -131,6 +131,31 @@ def apol_auto_fill():
     pg.press('tab')
 
 
+def apol_home_fill():
+    # Click Tasks
+    pg.click(370, 405)
+
+    # Click put Attachments - send app
+    pg.click(796, 494)
+    pg.keyDown('shift')
+    pg.click(808, 546)
+    pg.keyUp('shift')
+    time.sleep(2)
+
+    # Click edit
+    pg.click(280, 504)
+
+    time.sleep(1)
+
+    # Click status and change to complete
+    pg.click(687, 364)
+    pg.click(891, 358)
+    pg.hotkey('ctrl', 'a', 'c')
+    pg.typewrite('Completed')
+    pg.click(1079, 733)
+
+    time.sleep(2)
+
 
 root = Tk()
 frm = ttk.Frame(root, padding=10)
@@ -139,5 +164,6 @@ ttk.Label(frm, text="Hello World!").grid(column=0, row=0)
 ttk.Button(frm, text="Quit", command=root.destroy).grid(column=1, row=0)
 ttk.Button(frm, text="Carrier Specific Fill", command=carrier_specific_fill).grid(column=2, row=0)
 ttk.Button(frm, text="APOL auto fill", command=apol_auto_fill).grid(column=3, row=0)
+ttk.Button(frm, text="APOL home fill", command=apol_home_fill).grid(column=4, row=0)
 # ttk.Button(frm, text="Quote Results Fill", command=quote_results_fill).grid(column=3, row=0)
 root.mainloop()
