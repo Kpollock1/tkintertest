@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import ttk
 import pyautogui as pg
 import time
+from datetime import datetime
+from pytz import timezone
 
 
 def carrier_specific_fill():
@@ -145,7 +147,7 @@ def apol_home_fill():
     # Click edit
     pg.click(280, 504)
 
-    time.sleep(1)
+    time.sleep(2)
 
     # Click status and change to complete
     pg.click(687, 364)
@@ -156,12 +158,65 @@ def apol_home_fill():
 
     time.sleep(2)
 
+    # Select Send EOI, change Owner, and edit Start date
+    pg.click(818, 628)  # Send EOI
+    pg.click(280, 504)  # Edit
+    time.sleep(2)
+    pg.doubleClick(758, 369)  # Start
+    pg.typewrite(datetime.now(timezone('America/Chicago')).strftime('%m/%d/%Y'))    # Type central date
+    pg.press('tab')
+    pg.click(1175, 807)  # Finish
+    time.sleep(2)
+
+    # Select Did this close
+    pg.press('down')
+    time.sleep(2)
+    pg.click(280, 504)  # Edit
+    time.sleep(2)
+    pg.click(826, 339)  # Status
+    pg.hotkey('ctrl', 'a', 'c')
+    pg.typewrite('Not Applicable')
+    time.sleep(1)
+    pg.press('tab')
+    pg.click(1175, 807)  # Finish
+
+    # Select FU PMT and change owner
+    pg.press('down')
+    time.sleep(2)
+    pg.press('down')
+    pg.click(280, 504)  # Edit
+    time.sleep(2)
+    pg.doubleClick(793, 249)    # Owner
+    pg.typewrite('POLKYE')
+    time.sleep(1)
+    pg.press('tab')
+    pg.click(1175, 807)  # Finish
+
+    # Select EOI/HOI and change Owner and status
+    time.sleep(2)
+    pg.press('down')
+    pg.click(280, 504)  # Edit
+    time.sleep(2)
+    pg.doubleClick(793, 249)  # Owner
+    pg.typewrite('POLKYE')
+    time.sleep(2)
+    pg.press('tab')
+    pg.typewrite('Completed')
+    pg.press('tab')
+    time.sleep(1)
+    pg.click(1175, 807)  # Finish
+
+    # Change who/owner
+    time.sleep(2)
+    pg.doubleClick(721, 250)
+    pg.typewrite('POLRA1')
+    pg.press('tab')
+
 
 root = Tk()
 frm = ttk.Frame(root, padding=10)
 frm.grid()
 ttk.Label(frm, text="Hello World!").grid(column=0, row=0)
-ttk.Button(frm, text="Quit", command=root.destroy).grid(column=1, row=0)
 ttk.Button(frm, text="Carrier Specific Fill", command=carrier_specific_fill).grid(column=2, row=0)
 ttk.Button(frm, text="APOL auto fill", command=apol_auto_fill).grid(column=3, row=0)
 ttk.Button(frm, text="APOL home fill", command=apol_home_fill).grid(column=4, row=0)
